@@ -29,6 +29,19 @@ public final class RandomForestMP {
         }
     }
 
+    private static class DataToVector implements Function<String, Vector> {
+       private static final Pattern SPACE = Pattern.compile(",");
+
+       public Vector call(String line) throws Exception {
+            String[] tok = SPACE.split(line);
+            double[] point = new double[tok.length-1];
+            for (int i = 0; i < tok.length - 1; ++i) {
+                point[i] = Double.parseDouble(tok[i]);
+            }
+            return new Vectors.dense(point);
+        }
+    }
+
     public static void main(String[] args) {
         if (args.length < 3) {
             System.err.println(
@@ -53,7 +66,7 @@ public final class RandomForestMP {
         Integer seed = 12345;
 
         JavaRDD<LabeledPoint> trainingData = sc.textFile(training_data_path).map(new DataToPoint());
-        JavaRDD<LabeledPoint> test = sc.textFile(test_data_path).map(new DataToPoint());
+        JavaRDD<Vector> test = sc.textFile(test_data_path).map(new DataToVector());
 
 		model = RandomForest.trainClassifier(trainingData.rdd(), numClasses, categoricalFeaturesInfo,
   numTrees, featureSubsetStrategy, impurity, maxDepth, maxBins, seed);
