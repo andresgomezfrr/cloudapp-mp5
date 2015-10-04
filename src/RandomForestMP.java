@@ -38,7 +38,7 @@ public final class RandomForestMP {
             for (int i = 0; i < tok.length - 1; ++i) {
                 point[i] = Double.parseDouble(tok[i]);
             }
-            return new Vectors.dense(point);
+            return Vectors.dense(point);
         }
     }
 
@@ -68,7 +68,7 @@ public final class RandomForestMP {
         JavaRDD<LabeledPoint> trainingData = sc.textFile(training_data_path).map(new DataToPoint());
         JavaRDD<Vector> test = sc.textFile(test_data_path).map(new DataToVector());
 
-		model = RandomForest.trainClassifier(trainingData.rdd(), numClasses, categoricalFeaturesInfo,
+		model = RandomForest.trainClassifier(trainingData, numClasses, categoricalFeaturesInfo,
   numTrees, featureSubsetStrategy, impurity, maxDepth, maxBins, seed);
 
         JavaRDD<LabeledPoint> results = test.map(new Function<Vector, LabeledPoint>() {
