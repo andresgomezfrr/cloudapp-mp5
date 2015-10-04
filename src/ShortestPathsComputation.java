@@ -23,7 +23,7 @@ public class ShortestPathsComputation extends BasicComputation<
    * @param vertex Vertex
    * @return True if the source id
    */
-  private boolean isSource(Vertex<IntWritable, ?, ?> vertex) {
+  private int isSource(Vertex<IntWritable, ?, ?> vertex) {
     return vertex.getId().get() == SOURCE_ID.get(getConf());
   }
 
