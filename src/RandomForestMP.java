@@ -17,7 +17,7 @@ import java.util.regex.Pattern;
 public final class RandomForestMP {
 
     public static void main(String[] args) {
-        if (args.length < 3) {
+      /*  if (args.length < 3) {
             System.err.println(
                     "Usage: RandomForestMP <training_data> <test_data> <results>");
             System.exit(1);
@@ -41,7 +41,7 @@ public final class RandomForestMP {
 
 		// TODO
 
-       /* JavaRDD<LabeledPoint> results = test.map(new Function<Vector, LabeledPoint>() {
+        JavaRDD<LabeledPoint> results = test.map(new Function<Vector, LabeledPoint>() {
             public LabeledPoint call(Vector points) {
                 return new LabeledPoint(model.predict(points), points);
             }

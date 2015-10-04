@@ -18,7 +18,7 @@ import scala.Tuple2;
 public final class KMeansMP {
 	// TODO
     public static void main(String[] args) {
-        if (args.length < 2) {
+    /*    if (args.length < 2) {
             System.err.println(
                     "Usage: KMeansMP <input_file> <results>");
             System.exit(1);
@@ -39,6 +39,6 @@ public final class KMeansMP {
 
         results.saveAsTextFile(results_path);
 
-        sc.stop();
+        sc.stop();*/
     }
 }
