@@ -23,7 +23,7 @@ public class ShortestPathsComputation extends BasicComputation<
    * @param vertex Vertex
    * @return True if the source id
    */
-  private int isSource(Vertex<IntWritable, ?, ?> vertex) {
+  private boolean isSource(Vertex<IntWritable, ?, ?> vertex) {
     return vertex.getId().get() == SOURCE_ID.get(getConf());
   }
 
@@ -36,7 +36,7 @@ public class ShortestPathsComputation extends BasicComputation<
         vertex.setValue(new IntWritable(Integer.MAX_VALUE));
       }
 
-      int minDist = isSource(vertex) ? 0d : Integer.MAX_VALUE;
+      int minDist = isSource(vertex) ? 0 : Integer.MAX_VALUE;
       for (IntWritable message : messages) {
         minDist = Math.min(minDist, message.get());
       }
