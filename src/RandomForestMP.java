@@ -28,7 +28,7 @@ public final class RandomForestMP {
             return new LabeledPoint(label, Vectors.dense(point));
         }
     }
-    
+
     public static void main(String[] args) {
         if (args.length < 3) {
             System.err.println(
@@ -56,7 +56,7 @@ public final class RandomForestMP {
         JavaRDD<LabeledPoint> test = sc.textFile(test_data_path).map(new DataToPoint());
 
 		model = RandomForest.trainClassifier(trainingData, numClasses, categoricalFeaturesInfo,
-  numTrees, featureSubsetStrategy, impurity, maxDepth, maxBins, seed)
+  numTrees, featureSubsetStrategy, impurity, maxDepth, maxBins, seed);
 
         JavaRDD<LabeledPoint> results = test.map(new Function<Vector, LabeledPoint>() {
             public LabeledPoint call(Vector points) {
